@@ -1,0 +1,116 @@
+Nume: Popa Bianca, Manea Lidia-Elena
+Grupa: 311CA
+
+Tema 3 - Simple Linux File System
+
+A. Functii "create" implementate: 
+1. create_FileContent
+    Functia creeaza contentul unui TreeNode de tip file si returneaza o
+variabila de tip FileContent.
+
+2. create_FolderContent
+    Functia creeaza contentul unui TreeNode de tip folder si returneaza o
+variabila de tip FolderContent.
+
+3. create_TreeNode
+    Functia creeaza si returneaza un TreeNode.
+
+4. createFileTree
+    Functia creeaza un FileTree si folderul root al acestuia apeland functia
+create_FolderContent.
+
+B. Functii "free" implementate:
+1. free_file
+    Functia elibereaza din memorie contentul unui TreeNode de tip file.
+
+2. free_folder
+    Functia elibereaza din memorie contentul unui TreeNode de tip folder
+utilizand si apeluri ale functiei free_TreeNode.
+
+3. free_TreeNode
+    Functia elibereaza din memorie o variabila de tip TreeNode.
+
+4. freeTree
+    Functia elibereaza din memorie o variabila de tip FileTree si folderul
+root corespunzator ei.
+
+C. Comenzi bash implementate:
+1. touch
+    Functia touch creeaza un fisier cu numele <fileName> in directorul curent.
+Daca lista de resurse a directorului curent este goala, atunci fisierul care se
+creeaza va fi head-ul listei. Daca lista nu este goala, atunci aceasta este 
+parcursa, iar fisierul va fi adaugat la sfarsitul ei utilizand functia
+create_TreeNode.
+
+2. ls
+    Functia ls afiseaza utilizand functia print_dir resursele directorului curent
+daca este folosita fara niciun parametru. Daca are parametru, atunci se verifica 
+existenta unui fisier sau director cu numele <arg>. Daca este gasit un fisier, 
+atunci este afisat continutul text al acestuia. Daca este gasit un director, atunci
+se afiseaza resursele acestuia folosind functia print_dir. Daca nu exista niciun 
+fisier/director cu numele <arg>, atunci se va afisa un mesaj de eroare.
+    Functia print_dir afiseaza in ordine inversa elementele dintr-o lista.
+
+3. mkdir
+    Functia mkdir creeaza un folder cu numele <folderName> in directorul curent.
+Daca lista de resurse a directorului curent este goala, atunci folderul care se
+creeaza va fi head-ul listei. Daca lista nu este goala, atunci aceasta este 
+parcursa si se verifica daca directorul deja exista. Daca da, atunci se va afisa
+un mesaj de eroare. Daca nu, atunci folderul va fi adaugat la sfarsitul listei de
+resurse utilizand functia create_TreeNode.
+
+4. cd
+    Functia cd parcurge calea <path> si returneaza directorul destinatie. Daca
+calea este invalida, atunci se va afisa un mesaj de eroare. Variabila <path> 
+este de forma "dir1/dir2/...", iar pentru parcurgerea ei se va folosi functia 
+strtok cu delimitatorul "/".
+
+5. tree
+    Functia tree afiseaza utilizand functia print_tree ierahia de fisiere 
+pornind din directorul curent daca este folosita fara niciun paarmetru. Daca are
+parametru, atunci se parcurge calea <arg> in mod asemanator functiei cd. Daca 
+calea este invalida, atunci se va afisa un mesaj de eroare. Daca este valida, 
+atunci se va afisa folosind functia print_tree ierarhia de fisiere pornind de la 
+directorul destinatie.
+    Functia print_tree afiseaza ierarhia de fisiere pornind de la head-ul din
+lista de resurse a directorului curent/destinatie. Lista de resurse este afisata 
+in ordine inversa.
+
+6. pwd
+    Functia pwd afiseaza recursiv calea absoluta catre treeNode, folosindu-se de
+apeluri ale functiei ce au ca parametru parintele TreeNode-ului curent.
+
+7. rmdir
+    Functia rmdir parcurge lista de resurse a directorului curent pana gaseste
+resursa cu numele <folderName>. Daca aceasta este un fisier sau directorul nu 
+este gol, atunci se va afisa un mesaj de eroare. Altfel, directorul este sters
+din lista de resurse si eliberat din memorie apeland functia free_TreeNode.
+
+8. rm
+    Functia rm parcurge lista de resurse a directorului curent pana gaseste
+resursa cu numele <fileName>. Daca aceasta este un director, atunci se va 
+afisa un mesaj de eroare. Altfel, fisierul este sters din lista de resurse si 
+eliberat din memorie apeland functia free_TreeNode.
+
+9. rmrec
+    Functia rmrec parcurge lista de resurse a directorului curent pana gaseste
+resursa cu numele <resourceName>. Aceasta este stearsa din lista de resurse si 
+eliberata din memorie apeland functia free_TreeNode.
+
+10. cp
+    Functia cp parcurge calea sursei si destinatiei in mod asemanator functiei
+cd. Daca sursa este un director, atunci se va afisa un mesaj de eroare. Daca 
+destinatia este un director, atunci fisierul sursa va fi adaugat in lista de 
+resurse a acestuia utilizand functia touch. Daca destinatia este un fisier existent,
+atunci continutul text al fisierului sursa va fi copiat in fisierul destinatie.
+Daca destinatia este un fisier inexistent, atunci acesta va fi creat utilizand
+functia touch.
+
+11. mv
+    Functia mv parcurge calea sursei si destinatiei in mod asemanator functiei
+cd. Daca sursa este un fisier, atunci se va apela functia mv_file. Daca sursa
+este un director, atunci se va apela functia mv_folder.
+    Functia mv_file trateaza aceleasi cazuri ca functia cp, cu diferenta ca
+fisierul din calea sursa este sters apeland functia rm.
+    Functia mv_folder muta directorul sursa si toate resursele sale folosind
+apeluri recursive. Directorul din calea sursa este sters apeland functia rmrec.
